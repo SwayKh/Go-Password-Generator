@@ -29,32 +29,57 @@ import (
 
 func main() {
 	app := tview.NewApplication()
+	textArea := tview.NewTextView()
+
 	list := tview.NewList().
-		AddItem("Generate Password", "Create a random password or specific length", '1', output).
-		AddItem("Get Password", "Select a password from saved passwords list", '2', output).
-		AddItem("Delete Password", "Delete a password from saved passwords list", '3', output).
+		AddItem("Generate Password",
+			"Create a random password or specific length",
+			'1',
+			func() { NewTextViewString(textArea, "You Clicked Generate Password") }).
+		AddItem("Get Password",
+			"Select a password from saved passwords list",
+			'2',
+			func() { NewTextViewString(textArea, "You Clicked Get Password") }).
+		AddItem("Delete Password",
+			"Delete a password from saved passwords list",
+			'3',
+			func() { NewTextViewString(textArea, "You Clicked Delete Password") }).
 		AddItem("Quit", "Press to exit", 'q', func() {
 			app.Stop()
 		})
+	list.SetMainTextColor(tcell.ColorOrange).
+		SetSecondaryTextColor(tcell.ColorLightGray).
+		SetSelectedTextColor(tcell.ColorOrange).
+		SetSelectedBackgroundColor(tcell.ColorBlack)
 
-	list.SetMainTextColor(tcell.ColorOrange)
-	list.SetSecondaryTextColor(tcell.ColorLightGray)
-	list.SetSelectedTextColor(tcell.ColorOrange)
-	list.SetSelectedBackgroundColor(tcell.ColorBlack)
+	root := tview.NewFlex().
+		AddItem(list, 0, 1, true).
+		AddItem(textArea, 0, 1, false).
+		SetDirection(tview.FlexColumn)
 
-	// These are BOX properties, which every widget enherits
-	list.SetTitle("Password Generator")
-	list.SetBorder(true)
-	list.SetTitleColor(tcell.ColorBlue)
-	list.SetBackgroundColor(tcell.ColorReset)
+	list.SetBorder(true).
+		SetTitle("Options").
+		SetTitleColor(tcell.ColorBlue).
+		SetBackgroundColor(tcell.ColorReset)
 
-	if err := app.SetRoot(list, true).EnableMouse(true).Run(); err != nil {
+	textArea.SetBorder(true).
+		SetTitle("Output").
+		SetTitleColor(tcell.ColorBlue).
+		SetBackgroundColor(tcell.ColorReset)
+
+	root.SetBorder(true).
+		SetTitle("Password Generator").
+		SetTitleColor(tcell.ColorBlue).
+		SetBackgroundColor(tcell.ColorReset)
+
+	if err := app.SetRoot(root, true).Run(); err != nil {
 		panic(err)
 	}
 }
 
-func output() {
-	fmt.Print("You clicked on a list item")
+func NewTextViewString(textView *tview.TextView, newString string) {
+	textView.Clear()
+	fmt.Fprint(textView, newString)
 }
 
 func Start() {
