@@ -1,0 +1,12 @@
+# GO gitignore
+!data/
+password.json
+test/
+go.work
+.out
+# Binaries for programs and plugins
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
