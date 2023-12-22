@@ -1,4 +1,4 @@
-package main
+package Program
 
 import (
 	"fmt"
@@ -27,7 +27,7 @@ import (
 // saved
 // OR MAYBE NOT, it seems fine
 
-func main() {
+func Ui() {
 	app := tview.NewApplication()
 	textArea := tview.NewTextView()
 
