@@ -28,10 +28,13 @@ import (
 // OR MAYBE NOT, it seems fine
 
 func Ui() {
-	app := tview.NewApplication()
-	textArea := tview.NewTextView()
 	tview.Styles.PrimitiveBackgroundColor = tcell.ColorReset
+	tview.Styles.TitleColor = tcell.ColorBlue
+	tview.Styles.BorderColor = tcell.ColorBlue
+
+	app := tview.NewApplication()
 	defaultStyle := tcell.StyleDefault
+	textArea := tview.NewTextView().SetTextStyle(defaultStyle)
 
 	list := tview.NewList().
 		AddItem("Generate Password",
@@ -59,25 +62,20 @@ func Ui() {
 		AddItem(textArea, 0, 1, false).
 		SetDirection(tview.FlexColumn)
 
-	list.SetBorder(true).
-		SetTitle("Options").
-		SetTitleColor(tcell.ColorBlue).
-		SetBackgroundColor(tcell.ColorReset)
-
-	textArea.SetTextStyle(defaultStyle).
-		SetBorder(true).
-		SetTitle("Output").
-		SetTitleColor(tcell.ColorBlue).
-		SetBackgroundColor(tcell.ColorReset)
-
-	root.SetBorder(true).
-		SetTitle("Password Generator").
-		SetTitleColor(tcell.ColorBlue).
-		SetBackgroundColor(tcell.ColorReset)
+	addBoxStyles(root.Box, "Password Generator")
+	addBoxStyles(textArea.Box, "Output")
+	addBoxStyles(list.Box, "Option")
 
 	if err := app.SetRoot(root, true).Run(); err != nil {
 		panic(err)
 	}
+}
+
+func addBoxStyles(widget *tview.Box, title string) {
+	widget.SetBorder(true).
+		SetTitle(title).
+		SetTitleColor(tcell.ColorBlue).
+		SetBackgroundColor(tcell.ColorReset)
 }
 
 func NewTextViewString(textView *tview.TextView, newString string) {
