@@ -1,4 +1,4 @@
-package Program
+package cmd
 
 import (
 	"fmt"
@@ -30,6 +30,8 @@ import (
 func Ui() {
 	app := tview.NewApplication()
 	textArea := tview.NewTextView()
+	tview.Styles.PrimitiveBackgroundColor = tcell.ColorReset
+	defaultStyle := tcell.StyleDefault
 
 	list := tview.NewList().
 		AddItem("Generate Password",
@@ -62,7 +64,8 @@ func Ui() {
 		SetTitleColor(tcell.ColorBlue).
 		SetBackgroundColor(tcell.ColorReset)
 
-	textArea.SetBorder(true).
+	textArea.SetTextStyle(defaultStyle).
+		SetBorder(true).
 		SetTitle("Output").
 		SetTitleColor(tcell.ColorBlue).
 		SetBackgroundColor(tcell.ColorReset)

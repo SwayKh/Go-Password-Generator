@@ -1,10 +1,10 @@
 package main
 
 import (
-	"github.com/swaykh/Go-Password-generator/cmd/Program"
+	"github.com/swaykh/Go-Password-generator/cmd"
 )
 
 func main() {
-	Program.Ui()
-	// Program.Start()
+	cmd.Ui()
+	// cmd.Start()
 }
