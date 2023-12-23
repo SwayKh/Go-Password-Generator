@@ -10,6 +10,8 @@ import (
 	"io"
 )
 
+var KeyForEncryption = []byte("0123456789ABCDEF0123456789ABCDEF")
+
 func Encrypt(plainText string, key []byte) string {
 	cipherText, err := encode(plainText, key)
 	if err != nil {
