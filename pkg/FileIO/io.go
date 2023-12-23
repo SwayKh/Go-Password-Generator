@@ -17,7 +17,7 @@ type PasswordDetail struct {
 
 var filename = "./data/password.json"
 
-func GetPassword() []PasswordDetail {
+func LoadPasswords() []PasswordDetail {
 	// Get Password
 	var passArray []PasswordDetail
 	file, err := os.ReadFile(filename)
@@ -41,11 +41,9 @@ func Save(passArray *[]PasswordDetail, name *string, key *string, length *int) {
 	pass.PasswordLength = *length
 
 	pass.Date = now.Format("2 Jan")
-	pass.Time = now.Format("03:06")
+	pass.Time = now.Format("03:06 PM")
 
 	*passArray = append(*passArray, pass)
-	// pass.Date = fmt.Sprintf("Today's Date: %v\n", now.Format("2 Jan"))
-	// pass.Time = fmt.Sprintf("Current time: %v\n", now.Format("03:06"))
 
 	jsonData, err := json.MarshalIndent(*passArray, "", " ")
 	if err != nil {
