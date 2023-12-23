@@ -16,6 +16,22 @@ func GetPassName() *string {
 	return &passName
 }
 
+func GetOldPassword() bool {
+	scanner := bufio.NewScanner(os.Stdin)
+	var getChoice string
+	fmt.Print("Get Saved Password? [y/n]: ")
+	scanner.Scan()
+
+	if getChoice == "y" || getChoice == "Y" {
+		return true
+	} else if getChoice == "n" || getChoice == "N" {
+		return false
+	} else {
+		fmt.Println("Invalid Choice!, Defaulting to No")
+		return false
+	}
+}
+
 func ShouldSaveInfo() bool {
 	scanner := bufio.NewScanner(os.Stdin)
 	var saveChoice string
