@@ -2,6 +2,7 @@
 !data/
 password.json
 test/
+bin/
 go.work
 .out
 # Binaries for programs and plugins
