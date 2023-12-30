@@ -7,7 +7,7 @@ import (
 	"strconv"
 )
 
-func GetPassName() *string {
+func PromptForPasswordName() *string {
 	scanner := bufio.NewScanner(os.Stdin)
 	var passName string
 	fmt.Print("Enter a name or description of the password: ")
@@ -49,7 +49,7 @@ func ShouldSaveInfo() bool {
 	}
 }
 
-func GetLength() *int {
+func PromptForLength() *int {
 	var length int
 	scanner := bufio.NewScanner(os.Stdin)
 	fmt.Print("Enter Password length: ")

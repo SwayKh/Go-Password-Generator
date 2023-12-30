@@ -6,7 +6,6 @@ import (
 	"github.com/gdamore/tcell/v2"
 	"github.com/rivo/tview"
 
-	encryption "github.com/swaykh/Go-Password-generator/pkg/Encryption"
 	fileio "github.com/swaykh/Go-Password-generator/pkg/FileIO"
 	input "github.com/swaykh/Go-Password-generator/pkg/Input"
 	password "github.com/swaykh/Go-Password-generator/pkg/Password"
@@ -33,18 +32,14 @@ func Start() {
 	// Does running GetPassword put value into a struct into the package
 
 	passArray := fileio.LoadPasswords()
-	passwordList := password.GetPasswordTime(passArray)
-	fmt.Println(passwordList)
-	length := input.GetLength()
+	length := input.PromptForLength()
 
 	var pass *string = password.GeneratePassord(length)
 	fmt.Println("Your Password is: ", *pass)
 
-	encryptedPassword := encryption.Encrypt(*pass, encryption.KeyForEncryption)
-
 	if input.ShouldSaveInfo() {
-		passName := input.GetPassName()
-		fileio.Save(&passArray, passName, &encryptedPassword, length)
+		passName := input.PromptForPasswordName()
+		fileio.Save(&passArray, passName, pass, length)
 	} else {
 		// Do nothing
 	}

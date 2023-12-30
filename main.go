@@ -5,7 +5,7 @@ import (
 )
 
 func main() {
-	// cmd.Ui()
-	cmd.Start()
+	cmd.Ui()
+	// cmd.Start()
 	// cmd.Tui()
 }

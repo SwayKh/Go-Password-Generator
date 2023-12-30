@@ -5,6 +5,8 @@ import (
 	"fmt"
 	"os"
 	"time"
+
+	encryption "github.com/swaykh/Go-Password-generator/pkg/Encryption"
 )
 
 type PasswordDetail struct {
@@ -37,7 +39,7 @@ func Save(passArray *[]PasswordDetail, name *string, key *string, length *int) {
 	var pass PasswordDetail
 
 	pass.Name = *name
-	pass.Key = *key
+	pass.Key = encryption.Encrypt(*key, encryption.KeyForEncryption)
 	pass.PasswordLength = *length
 
 	pass.Date = now.Format("2 Jan")
