@@ -45,6 +45,20 @@ func Start() {
 	}
 }
 
+func Test() {
+	passArray := fileio.LoadPasswords()
+	nameList := password.GetPasswordNames(passArray)
+
+	for i := range nameList {
+		fmt.Printf("%v: %v\n", i+1, nameList[i])
+	}
+	fmt.Println()
+	passID := input.PromptForPasswordID()
+
+	decryptedPasswords := password.GetPasswordDecrypted(passArray)
+	fmt.Println("Your Password is: ", decryptedPasswords[passID-1])
+}
+
 func Ui() {
 	app := tview.NewApplication()
 

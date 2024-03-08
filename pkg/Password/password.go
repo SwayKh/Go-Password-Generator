@@ -48,11 +48,11 @@ func GetPasswordLength(passwordList []fileio.PasswordDetail) []int {
 }
 
 func GetPasswordDecrypted(passwordList []fileio.PasswordDetail) []string {
-	passwordDecrypted := []string{}
+	decryptedPasswordSlice := []string{}
 
 	for i := range passwordList {
 		decryptedPassword := encryption.Decrypt(passwordList[i].Key, encryption.KeyForEncryption)
-		passwordDecrypted = append(passwordDecrypted, decryptedPassword)
+		decryptedPasswordSlice = append(decryptedPasswordSlice, decryptedPassword)
 	}
-	return passwordDecrypted
+	return decryptedPasswordSlice
 }

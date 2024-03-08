@@ -16,6 +16,17 @@ func PromptForPasswordName() *string {
 	return &passName
 }
 
+func PromptForPasswordID() int {
+	scanner := bufio.NewScanner(os.Stdin)
+	fmt.Print("Choose a password number to show the password: ")
+	scanner.Scan()
+	passID, err := strconv.Atoi(scanner.Text())
+	if err != nil {
+		fmt.Println("Invalid Data Entered!\n", err)
+	}
+	return passID
+}
+
 func GetOldPassword() bool {
 	scanner := bufio.NewScanner(os.Stdin)
 	var getChoice string
